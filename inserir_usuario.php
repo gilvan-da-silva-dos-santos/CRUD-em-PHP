@@ -12,9 +12,12 @@ if(isset($_POST['email']) && !empty($_POST['email'])) {
 	$email 	= addslashes($_POST['email']);
 	$senha 	= addslashes(md5($_POST['senha']));
 
-		$crud->create($nome, $email, $senha);
-
-		header('Location: usuarios_cadastrados.php');
+		if($crud->create($nome, $email, $senha)) {
+			echo "CASTRADO COM SUCESSO!!";
+			header('Location: usuarios_cadastrados.php');
+		}	else {
+			echo "USUÁRIO JÁ CADASTRADO!!";
+		}
 }
 ?>
 
